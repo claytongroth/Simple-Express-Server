@@ -1,22 +1,11 @@
-const request = require("request");
-const genRand = require('../utils/generateRandomMatchId')
+const genRandom = require('../utils/genRandom');
+const fetch = require('node-fetch');
 
-const exampleSVC = async () => {
-  //TODO: use fetch
-  request(
-    "https://jsonplaceholder.typicode.com/todos/1",
-    (error, response, body) => {
-      console.error("error:", error); // Print the error if one occurred
-      console.log("statusCode:", response && response.statusCode); // Print the response status code if a response was received
-      console.log("body:", body); // Print the HTML 
-      return body
-    }
-  ).then(res => {
-      //Do stuff to response...
-      return res
-  }).catch(err => {
-      throw new Error(err)
-  })
+const exampleSVC = async (number) => {
+    const randomNumber = genRandom(number);
+    const response = await fetch(`https://jsonplaceholder.typicode.com/todos/${randomNumber}`);
+    const json = await response.json();
+    return json;
 };
 
 module.exports = exampleSVC;

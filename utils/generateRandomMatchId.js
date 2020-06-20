@@ -1,3 +1,0 @@
-exports.generateRandomMatchId = function () {
-    // body...
-};
